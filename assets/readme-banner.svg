@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" fill="none">
+  <defs>
+    <linearGradient id="background" x1="20" y1="0" x2="1180" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#080B12"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="140" y1="90" x2="770" y2="270" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A5B4FC"/>
+      <stop offset="1" stop-color="#67E8F9"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientTransform="matrix(270 140 -180 348 1010 67)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6366F1" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#6366F1" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="360" rx="28" fill="url(#background)"/>
+  <rect width="1200" height="360" rx="28" fill="url(#glow)"/>
+  <path d="M0 292.5h1200" stroke="#fff" stroke-opacity=".08"/>
+  <path d="M0 322.5h1200" stroke="#fff" stroke-opacity=".04"/>
+  <path d="M845 0v360M925 0v360M1005 0v360M1085 0v360" stroke="#fff" stroke-opacity=".035"/>
+  <circle cx="1030" cy="165" r="94" stroke="#A5B4FC" stroke-opacity=".13"/>
+  <circle cx="1030" cy="165" r="68" stroke="#67E8F9" stroke-opacity=".18"/>
+  <circle cx="1030" cy="165" r="8" fill="#67E8F9"/>
+  <text x="78" y="106" fill="#A5B4FC" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="600" letter-spacing="4">SOFTWARE • SAAS • ENGINEERING</text>
+  <text x="74" y="177" fill="url(#accent)" font-family="Segoe UI, Arial, sans-serif" font-size="54" font-weight="700" letter-spacing="-2">Aljaffarsyah Labs</text>
+  <text x="80" y="222" fill="#CBD5E1" font-family="Segoe UI, Arial, sans-serif" font-size="20">A portfolio of products, ideas, and the work behind them.</text>
+  <rect x="80" y="260" width="145" height="34" rx="17" fill="#fff" fill-opacity=".06" stroke="#fff" stroke-opacity=".13"/>
+  <text x="101" y="282" fill="#E2E8F0" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="1">BUILD IN PUBLIC</text>
+</svg>
