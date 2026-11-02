@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
@@ -98,6 +99,20 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             </div>
           )}
         </section>
+
+        {/* Hero / Cover Image */}
+        {project.heroImage?.src && (
+          <div className="relative aspect-video sm:aspect-[21/9] w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl bg-white/5">
+            <Image
+              src={project.heroImage.src}
+              alt={project.heroImage.alt}
+              fill
+              priority
+              sizes="(max-width: 1200px) 100vw, 1200px"
+              className="object-cover"
+            />
+          </div>
+        )}
 
         {/* Problem & Solution Cards */}
         <section className="grid gap-8 md:grid-cols-2">

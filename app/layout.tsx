@@ -31,6 +31,25 @@ export const metadata: Metadata = {
     "Portfolio",
   ],
   authors: [{ name: "Aljaffarsyah" }],
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://aljaffarsyah.com",
+    siteName: "Aljaffarsyah Labs",
+    title: "Aljaffarsyah Labs | Software & SaaS Portfolio",
+    description:
+      "Engineering-led portfolio and showcase of high-performance SaaS products and software architecture.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aljaffarsyah Labs | Software & SaaS Portfolio",
+    description:
+      "Engineering-led portfolio and showcase of high-performance SaaS products and software architecture.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
