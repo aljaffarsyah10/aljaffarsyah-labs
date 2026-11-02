@@ -1,174 +1,122 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-import { getAllProjects } from "../../lib/projects";
+import { ArrowUpRight } from "lucide-react";
+import { getAllProjects } from "@/lib/projects";
 
 export const metadata: Metadata = {
-  title: "Projects | DEV.SOLO",
-  description: "Curated project archive for DEV.SOLO engineering work.",
+  title: "Projects",
+  description:
+    "Curated project archive of software engineering and SaaS products by Aljaffarsyah Labs.",
 };
 
 const projects = getAllProjects();
 
 export default function ProjectsPage() {
   return (
-    <div className="min-h-screen bg-black text-slate-100 selection:bg-slate-200 selection:text-slate-950">
-      <nav className="sticky top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4 sm:px-8">
-          <Link
-            href="/"
-            className="text-2xl font-black tracking-tight text-white"
-          >
-            DEV.SOLO
-          </Link>
-          <div className="hidden md:flex items-center gap-10 text-sm uppercase tracking-[0.28em] text-slate-300">
-            <Link href="/" className="transition-colors hover:text-white">
-              Home
-            </Link>
-            <Link href="/projects" className="text-white">
-              Projects
-            </Link>
-            <a href="#archive" className="transition-colors hover:text-white">
-              Archive
-            </a>
-            <a href="#contact" className="transition-colors hover:text-white">
-              Contact
-            </a>
+    <div className="relative min-h-screen pt-28 pb-24 overflow-hidden">
+      <div className="fixed inset-0 grid-bg pointer-events-none -z-10" />
+      <div className="fixed top-0 left-[20%] h-[500px] w-[500px] blur-[120px] glow-accent pointer-events-none -z-10" />
+
+      {/* Header */}
+      <section className="mx-auto max-w-[1200px] px-6 pb-12 sm:px-8">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs uppercase tracking-[0.28em] text-slate-300 mb-4">
+              Portfolio Archive
+            </div>
+            <h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl">
+              All Projects
+            </h1>
+            <p className="mt-4 max-w-2xl text-base sm:text-lg text-slate-400">
+              A curated archive of high-performance software engineering, SaaS
+              products, and modern web applications.
+            </p>
           </div>
-          <Link
-            href="/#contact"
-            className="rounded-full bg-slate-100 px-6 py-2.5 text-sm font-semibold uppercase tracking-[0.24em] text-black transition hover:opacity-90 active:scale-[0.98]"
-          >
-            Start a Project
-          </Link>
+          <div className="rounded-2xl border border-white/10 bg-white/5 px-5 py-3 text-xs uppercase tracking-[0.2em] text-slate-300 self-start md:self-auto">
+            {projects.length} Total Projects
+          </div>
         </div>
-      </nav>
+      </section>
 
-      <main className="pt-24">
-        <section className="mx-auto max-w-[1200px] px-6 pb-12 sm:px-8">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-            <div>
-              <h1 className="text-4xl font-black tracking-tight text-white sm:text-5xl">
-                All Projects
-              </h1>
-              <p className="mt-4 max-w-2xl text-lg leading-8 text-slate-400">
-                A curated archive of high-performance engineering, digital
-                products, and experimental open-source software.
-              </p>
-            </div>
-            <div className="rounded-3xl border border-white/10 bg-white/5 p-4 text-sm text-slate-300">
-              {projects.length} featured projects.
-            </div>
-          </div>
-        </section>
-
-        <section className="mx-auto max-w-[1200px] px-6 pb-16 sm:px-8">
-          <div className="flex flex-col gap-4 rounded-3xl border border-white/10 bg-white/5 p-4 shadow-xl shadow-black/10 md:flex-row md:items-center md:justify-between">
-            <div className="flex-1">
-              <label className="block text-sm uppercase tracking-[0.28em] text-slate-400">
-                Search projects
-              </label>
-              <input
-                type="text"
-                placeholder="Search systems, frameworks, or names..."
-                className="mt-3 w-full rounded-2xl border border-white/10 bg-black/80 px-4 py-3 text-slate-100 outline-none placeholder:text-slate-500 focus:border-slate-300 focus:ring-2 focus:ring-slate-300/10"
-              />
-            </div>
-            <div className="grid gap-3 text-sm text-slate-300 sm:grid-cols-2 md:grid-cols-3">
-              {[
-                "All Projects",
-                "SaaS",
-                "Web Apps",
-                "Open Source",
-                "Infrastructure",
-              ].map((label) => (
-                <button
-                  key={label}
-                  className="rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-left text-slate-100 transition hover:border-slate-300 hover:text-white"
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section
-          id="archive"
-          className="mx-auto max-w-[1200px] px-6 pb-20 sm:px-8"
-        >
-          <div className="grid gap-8 lg:grid-cols-3">
-            {projects.map((project) => (
-              <article
-                key={project.slug}
-                className="glass-card flex flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/5 shadow-xl shadow-black/10"
-              >
-                <div className="p-8">
-                  <div className="flex items-center justify-between gap-4 mb-4">
-                    <span className="rounded-full border border-white/10 bg-black/70 px-3 py-1 text-[11px] uppercase tracking-[0.32em] text-slate-300">
-                      {project.category}
-                    </span>
-                    <span className="text-slate-500 text-xs uppercase tracking-[0.24em]">
-                      {project.tags.length} tags
-                    </span>
-                  </div>
-                  <h2 className="text-2xl font-semibold text-white">
-                    <Link
-                      href={`/projects/${project.slug}`}
-                      className="transition hover:text-secondary"
-                    >
-                      {project.title}
-                    </Link>
-                  </h2>
-                  <p className="mt-4 text-slate-400">{project.description}</p>
+      {/* Project Grid */}
+      <section className="mx-auto max-w-[1200px] px-6 pb-20 sm:px-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => (
+            <article
+              key={project.slug}
+              className="group glass-card flex flex-col justify-between overflow-hidden rounded-3xl border border-white/10 p-6 shadow-xl shadow-black/20 transition-all duration-300 hover:-translate-y-1 hover:border-white/20"
+            >
+              <div>
+                <div className="flex items-center justify-between text-xs text-slate-400 mb-4">
+                  <span className="rounded-full bg-white/10 px-3 py-1 font-mono uppercase tracking-wider text-[11px] text-slate-200">
+                    {project.category}
+                  </span>
+                  <span className="text-[11px] uppercase tracking-wider text-slate-500">
+                    {project.tags.length} technologies
+                  </span>
                 </div>
-                <div className="mt-auto flex flex-wrap gap-2 border-t border-white/10 bg-black/80 px-8 py-4">
-                  {project.tags.map((tag) => (
+
+                <h2 className="text-2xl font-bold text-white group-hover:text-slate-100 transition-colors">
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 rounded"
+                  >
+                    {project.title}
+                  </Link>
+                </h2>
+
+                <p className="mt-3 text-sm leading-6 text-slate-400 line-clamp-3">
+                  {project.description}
+                </p>
+              </div>
+
+              <div className="mt-8 pt-4 border-t border-white/10 flex items-center justify-between">
+                <div className="flex flex-wrap gap-1.5">
+                  {project.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] uppercase tracking-[0.32em] text-slate-300"
+                      className="rounded-full bg-white/5 px-2.5 py-1 text-[10px] uppercase tracking-wider text-slate-300"
                     >
                       {tag}
                     </span>
                   ))}
                 </div>
-              </article>
-            ))}
-          </div>
-        </section>
+                <Link
+                  href={`/projects/${project.slug}`}
+                  aria-label={`View ${project.title} details`}
+                  className="rounded-full p-2 text-slate-400 hover:text-white transition-colors"
+                >
+                  <ArrowUpRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
-        <section
-          id="contact"
-          className="mx-auto max-w-[1200px] px-6 pb-24 sm:px-8"
-        >
-          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-12 text-center shadow-2xl shadow-black/20 backdrop-blur-2xl">
-            <p className="text-sm uppercase tracking-[0.28em] text-slate-400">
-              Ready to build?
-            </p>
-            <h2 className="mt-4 text-4xl font-black tracking-tight text-white sm:text-5xl">
-              Start your next project with DEV.SOLO.
-            </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-400">
-              I&apos;m accepting select collaborations for Q4 2024. Let&apos;s
-              design and ship a product that feels premium, performs
-              beautifully, and scales effortlessly.
-            </p>
-            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link
-                href="/#contact"
-                className="rounded-full bg-slate-100 px-8 py-4 text-sm font-semibold uppercase tracking-[0.24em] text-black transition hover:opacity-90"
-              >
-                Start a Project
-              </Link>
-              <a
-                href="#"
-                className="rounded-full border border-white/10 px-8 py-4 text-sm uppercase tracking-[0.24em] text-slate-100 transition hover:bg-white/10"
-              >
-                Download CV
-              </a>
-            </div>
+      {/* Bottom CTA */}
+      <section className="mx-auto max-w-[1200px] px-6 sm:px-8">
+        <div className="glass-card rounded-[2.5rem] border border-white/10 p-12 text-center shadow-2xl space-y-6">
+          <p className="text-xs uppercase tracking-[0.28em] text-slate-400">
+            Have a project in mind?
+          </p>
+          <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
+            Start your next product with Aljaffarsyah Labs.
+          </h2>
+          <p className="mx-auto max-w-xl text-base text-slate-400">
+            Let&apos;s build software that performs beautifully and scales
+            effortlessly.
+          </p>
+          <div className="pt-2">
+            <Link
+              href="/contact"
+              className="inline-flex rounded-full bg-slate-100 px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-white"
+            >
+              Get in Touch
+            </Link>
           </div>
-        </section>
-      </main>
+        </div>
+      </section>
     </div>
   );
 }

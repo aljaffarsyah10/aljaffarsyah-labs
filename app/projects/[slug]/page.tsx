@@ -1,225 +1,201 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getAllProjects, getProjectBySlug } from "../../../lib/projects";
+import { ArrowLeft, ArrowUpRight } from "lucide-react";
+import { getAllProjects, getProjectBySlug } from "@/lib/projects";
+
+type PageProps = {
+  params: Promise<{ slug: string }>;
+};
 
 export function generateStaticParams() {
   return getAllProjects().map((project) => ({ slug: project.slug }));
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
-}: {
-  params: { slug: string };
-}): Metadata {
-  const project = getProjectBySlug(params.slug);
+}: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     return {
-      title: "Project Not Found | DEV.SOLO",
-      description: "Project not found.",
+      title: "Project Not Found",
+      description: "The requested project case study was not found.",
     };
   }
 
   return {
-    title: `${project.title} | DEV.SOLO`,
+    title: project.title,
     description: project.description,
   };
 }
 
-export default function ProjectDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const project = getProjectBySlug(params.slug);
+export default async function ProjectDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const project = getProjectBySlug(slug);
 
   if (!project) {
     notFound();
   }
 
-  return (
-    <div className="min-h-screen bg-black text-slate-100 selection:bg-slate-200 selection:text-slate-950">
-      <nav className="sticky top-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-4 sm:px-8">
-          <Link
-            href="/"
-            className="text-2xl font-black tracking-tight text-white"
-          >
-            DEV.SOLO
-          </Link>
-          <div className="hidden md:flex items-center gap-10 text-sm uppercase tracking-[0.28em] text-slate-300">
-            <Link href="/" className="transition-colors hover:text-white">
-              Home
-            </Link>
-            <Link
-              href="/projects"
-              className="transition-colors hover:text-white"
-            >
-              Projects
-            </Link>
-            <a href="#details" className="transition-colors hover:text-white">
-              Details
-            </a>
-            <a href="#contact" className="transition-colors hover:text-white">
-              Contact
-            </a>
-          </div>
-          <Link
-            href="/projects"
-            className="rounded-full bg-slate-100 px-6 py-2.5 text-sm font-semibold uppercase tracking-[0.24em] text-black transition hover:opacity-90 active:scale-[0.98]"
-          >
-            Back to Projects
-          </Link>
-        </div>
-      </nav>
+  const hasValidDemo = project.demoUrl && project.demoUrl !== "#";
+  const hasValidGithub = project.githubUrl && project.githubUrl !== "#";
 
-      <main className="pt-24">
-        <section className="relative overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(88,86,214,0.1),_transparent_40%)] opacity-40 pointer-events-none" />
-          <div className="relative mx-auto max-w-[1200px] px-6 pb-12 pt-12 sm:px-8">
-            <div className="flex flex-col gap-6 text-slate-300">
-              <span className="text-sm uppercase tracking-[0.28em] text-secondary">
-                {project.category}
-              </span>
-              <h1 className="max-w-4xl text-5xl font-black tracking-tight text-white sm:text-6xl">
-                {project.title}
-              </h1>
-              <p className="max-w-3xl text-xl leading-8 text-slate-400">
-                {project.overview}
-              </p>
-              <div className="flex flex-wrap items-center gap-3">
-                <Link
+  return (
+    <div className="relative min-h-screen pt-28 pb-24 overflow-hidden">
+      <div className="fixed inset-0 grid-bg pointer-events-none -z-10" />
+      <div className="fixed top-0 left-[20%] h-[500px] w-[500px] blur-[120px] glow-accent pointer-events-none -z-10" />
+
+      {/* Back button & Breadcrumb */}
+      <div className="mx-auto max-w-[1200px] px-6 sm:px-8 pb-8">
+        <Link
+          href="/projects"
+          className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-slate-400 hover:text-white transition-colors"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to all projects
+        </Link>
+      </div>
+
+      <main className="mx-auto max-w-[1200px] px-6 sm:px-8 space-y-16">
+        {/* Project Header */}
+        <section className="space-y-6">
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs uppercase tracking-[0.28em] text-slate-300">
+            {project.category}
+          </div>
+          <h1 className="text-4xl font-black tracking-tight text-white sm:text-6xl max-w-4xl">
+            {project.title}
+          </h1>
+          <p className="max-w-3xl text-lg sm:text-xl leading-8 text-slate-400">
+            {project.overview}
+          </p>
+
+          {(hasValidDemo || hasValidGithub) && (
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              {hasValidDemo && (
+                <a
                   href={project.demoUrl}
-                  className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-6 py-3 text-sm font-semibold uppercase tracking-[0.24em] text-black transition hover:opacity-90"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full bg-slate-100 px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-white"
                 >
                   Live Demo
-                </Link>
-                <Link
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              )}
+              {hasValidGithub && (
+                <a
                   href={project.githubUrl}
-                  className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-transparent px-6 py-3 text-sm uppercase tracking-[0.24em] text-slate-100 transition hover:bg-white/5"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-6 py-3 text-xs font-semibold uppercase tracking-[0.24em] text-white transition hover:bg-white/10"
                 >
-                  GitHub
-                </Link>
-              </div>
+                  Source Code
+                  <ArrowUpRight className="h-4 w-4" />
+                </a>
+              )}
             </div>
+          )}
+        </section>
+
+        {/* Problem & Solution Cards */}
+        <section className="grid gap-8 md:grid-cols-2">
+          <div className="glass-card rounded-3xl border border-white/10 p-8 sm:p-10 space-y-4">
+            <span className="text-xs uppercase tracking-[0.24em] text-rose-400 font-mono">
+              The Challenge
+            </span>
+            <h2 className="text-2xl font-bold text-white">The Problem</h2>
+            <p className="text-sm sm:text-base leading-7 text-slate-400">
+              {project.problem}
+            </p>
+          </div>
+
+          <div className="glass-card rounded-3xl border border-white/10 p-8 sm:p-10 space-y-4">
+            <span className="text-xs uppercase tracking-[0.24em] text-emerald-400 font-mono">
+              The Approach
+            </span>
+            <h2 className="text-2xl font-bold text-white">The Solution</h2>
+            <p className="text-sm sm:text-base leading-7 text-slate-400">
+              {project.solution}
+            </p>
           </div>
         </section>
 
-        <section className="mx-auto max-w-[1200px] px-6 pb-20 sm:px-8">
-          <div className="grid gap-12 lg:grid-cols-[1.3fr_0.7fr]">
-            <div className="space-y-12">
-              <article
-                id="details"
-                className="space-y-8 rounded-[2rem] border border-white/10 bg-white/5 p-10 shadow-2xl shadow-black/20"
-              >
-                <div>
-                  <h2 className="text-3xl font-semibold text-white">
-                    Project Details
-                  </h2>
-                  <p className="mt-4 text-slate-400 leading-8">
-                    {project.description}
-                  </p>
-                </div>
-                <div className="grid gap-8 md:grid-cols-2">
-                  <div className="space-y-4 rounded-3xl border border-white/10 bg-black/70 p-6">
-                    <h3 className="text-lg font-semibold text-white">
-                      The Problem
-                    </h3>
-                    <p className="text-slate-400 leading-7">
-                      {project.problem}
-                    </p>
-                  </div>
-                  <div className="space-y-4 rounded-3xl border border-white/10 bg-black/70 p-6">
-                    <h3 className="text-lg font-semibold text-white">
-                      The Solution
-                    </h3>
-                    <p className="text-slate-400 leading-7">
-                      {project.solution}
-                    </p>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <h3 className="text-lg font-semibold text-white">
-                    Highlights
+        {/* Key Highlights */}
+        {project.highlights && project.highlights.length > 0 && (
+          <section className="glass-card rounded-3xl border border-white/10 p-8 sm:p-10 space-y-6">
+            <h2 className="text-2xl font-bold text-white">
+              Key Engineering Highlights
+            </h2>
+            <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {project.highlights.map((highlight, index) => (
+                <li
+                  key={index}
+                  className="rounded-2xl border border-white/5 bg-white/[0.02] p-5 text-sm leading-6 text-slate-300"
+                >
+                  <span className="font-mono text-xs text-slate-500 block mb-2">
+                    0{index + 1}
+                  </span>
+                  {highlight}
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
+
+        {/* Tech Stack Breakdown */}
+        {project.techStack && project.techStack.length > 0 && (
+          <section className="space-y-6">
+            <h2 className="text-2xl font-bold text-white">
+              Technologies & Infrastructure
+            </h2>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {project.techStack.map((group) => (
+                <div
+                  key={group.title}
+                  className="glass-card rounded-2xl border border-white/10 p-6 space-y-3"
+                >
+                  <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-slate-300">
+                    {group.title}
                   </h3>
-                  <ul className="list-inside list-disc space-y-2 text-slate-400">
-                    {project.highlights.map((highlight) => (
-                      <li key={highlight}>{highlight}</li>
-                    ))}
-                  </ul>
-                </div>
-              </article>
-
-              <div className="rounded-[2rem] border border-white/10 bg-white/5 p-10 shadow-2xl shadow-black/20">
-                <div className="space-y-6">
-                  <h3 className="text-2xl font-semibold text-white">Metrics</h3>
-                  <div className="grid gap-6 sm:grid-cols-3">
-                    {project.metrics.map((metric) => (
-                      <div
-                        key={metric.label}
-                        className="rounded-3xl border border-white/10 bg-black/70 p-6 text-center"
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full bg-white/5 border border-white/10 px-3 py-1 text-xs text-slate-300"
                       >
-                        <p className="text-4xl font-black text-white">
-                          {metric.value}
-                        </p>
-                        <p className="mt-2 text-sm uppercase tracking-[0.28em] text-slate-400">
-                          {metric.label}
-                        </p>
-                      </div>
+                        {item}
+                      </span>
                     ))}
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
+          </section>
+        )}
 
-            <aside className="space-y-8">
-              <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 shadow-2xl shadow-black/20">
-                <h3 className="text-xl font-semibold text-white">Tech Stack</h3>
-                <div className="mt-6 space-y-6">
-                  {project.techStack.map((group) => (
-                    <div key={group.title}>
-                      <p className="text-sm uppercase tracking-[0.28em] text-slate-400">
-                        {group.title}
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {group.items.map((item) => (
-                          <span
-                            key={item}
-                            className="rounded-full border border-white/10 bg-black/70 px-3 py-2 text-[12px] uppercase tracking-[0.28em] text-slate-300"
-                          >
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-[2rem] border border-white/10 bg-black/80 p-8 shadow-2xl shadow-black/20">
-                <h3 className="text-xl font-semibold text-white">
-                  Project Navigation
-                </h3>
-                <div className="mt-6 flex flex-col gap-4">
-                  {getAllProjects()
-                    .filter((item) => item.slug !== project.slug)
-                    .slice(0, 2)
-                    .map((item) => (
-                      <Link
-                        key={item.slug}
-                        href={`/projects/${item.slug}`}
-                        className="rounded-3xl border border-white/10 bg-white/5 px-5 py-4 text-slate-300 transition hover:border-slate-300 hover:text-white"
-                      >
-                        <p className="font-semibold text-white">{item.title}</p>
-                        <p className="text-sm text-slate-400">
-                          {item.category}
-                        </p>
-                      </Link>
-                    ))}
-                </div>
-              </div>
-            </aside>
+        {/* Bottom CTA */}
+        <section className="glass-card rounded-[2.5rem] border border-white/10 p-12 text-center shadow-2xl space-y-6">
+          <p className="text-xs uppercase tracking-[0.28em] text-slate-400">
+            Interested in building something similar?
+          </p>
+          <h2 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
+            Let&apos;s talk about your system architecture.
+          </h2>
+          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/contact"
+              className="inline-flex rounded-full bg-slate-100 px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-white"
+            >
+              Contact Developer
+            </Link>
+            <Link
+              href="/projects"
+              className="inline-flex rounded-full border border-white/15 bg-transparent px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.24em] text-white transition hover:bg-white/10"
+            >
+              Browse More Projects
+            </Link>
           </div>
         </section>
       </main>
