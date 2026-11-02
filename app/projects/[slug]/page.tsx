@@ -2,14 +2,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { getAllProjects, getProjectBySlug } from "@/lib/projects";
+import { getAllPublishedProjectSlugs, getProjectBySlug } from "@/lib/projects";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
-  return getAllProjects().map((project) => ({ slug: project.slug }));
+  return getAllPublishedProjectSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({

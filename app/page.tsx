@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
-import { getAllProjects } from "@/lib/projects";
+import { getFeaturedProjects, getPublishedProjects } from "@/lib/projects";
 
 export const metadata: Metadata = {
   title: "Aljaffarsyah Labs | Software & SaaS Portfolio",
@@ -21,7 +21,8 @@ const skills = [
 ];
 
 export default function HomePage() {
-  const featuredProjects = getAllProjects().slice(0, 3);
+  const featuredProjects = getFeaturedProjects();
+  const allProjectsCount = getPublishedProjects().length;
 
   return (
     <div className="relative overflow-hidden pt-20">
@@ -97,7 +98,7 @@ export default function HomePage() {
               href="/projects"
               className="inline-flex items-center gap-2 rounded-full border border-white/10 px-5 py-2 text-xs uppercase tracking-[0.24em] text-slate-300 transition hover:border-slate-300 hover:text-white"
             >
-              All Projects ({getAllProjects().length})
+              All Projects ({allProjectsCount})
               <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </div>

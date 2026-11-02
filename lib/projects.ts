@@ -1,268 +1,300 @@
-import type { Project } from "../types/project";
+import type { Project } from "@/types/project";
 
 export const projects: Project[] = [
   {
+    id: "proj-01",
     slug: "aether-analytics",
     title: "Aether Analytics",
     category: "SaaS",
     description:
-      "A next-generation enterprise telemetry engine built for high-throughput data visualization and predictive modeling.",
+      "Enterprise telemetry engine built for high-throughput data visualization and predictive modeling.",
     overview:
-      "Aether Analytics combines real-time market signal processing with a modular analytics layer for institutional clients.",
+      "Aether Analytics combines real-time signal processing with a modular analytics layer for high-throughput institutional applications.",
     problem:
-      "Existing tools fragmented liquidity and introduced long synchronization delays, causing costly slippage for traders.",
+      "Existing tools fragmented data ingestion and introduced long synchronization delays, creating costly visibility gaps.",
     solution:
-      "We built a distributed event pipeline with Rust edge workers and a resilient micro-frontend interface to keep all markets in sync with sub-150ms latency.",
+      "Engineered an event pipeline with edge workers and a resilient micro-frontend architecture to maintain sub-150ms stream latency.",
     highlights: [
-      "Low-latency WebSocket sync across global regions",
-      "Modular plugin architecture for asset class expansion",
-      "Integrated security with multi-signature authentication",
+      "Low-latency WebSocket synchronization across distributed edge regions",
+      "Modular plugin architecture for extensible data visualization",
+      "End-to-end auditability and role-based access control",
     ],
-    tags: ["TypeScript", "Next.js", "Rust"],
-    heroImage:
-      "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1400&q=80",
+    tags: ["TypeScript", "Next.js", "Rust", "WebSocket"],
+    heroImage: {
+      src: "https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1400&q=80",
+      alt: "Dark telemetry interface showing analytical chart breakdowns",
+    },
     techStack: [
       {
         title: "Frontend",
-        items: ["React", "Next.js", "Tailwind CSS", "Framer Motion"],
+        items: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
       },
       {
-        title: "Backend",
+        title: "Backend & Systems",
         items: ["Rust", "Node.js", "gRPC", "PostgreSQL"],
       },
       {
         title: "Infrastructure",
-        items: ["AWS Lambda", "Docker", "Redis", "Terraform"],
+        items: ["Docker", "Redis", "Cloudflare Workers", "AWS"],
       },
     ],
-    metrics: [
-      { label: "Latency Reduction", value: "98%" },
-      { label: "Volume Processed", value: "$1.2B" },
-      { label: "Average Tick Delay", value: "15ms" },
-    ],
-    demoUrl: "#",
-    githubUrl: "#",
+    featured: true,
+    published: true,
+    createdAt: "2025-01-15T00:00:00.000Z",
+    updatedAt: "2025-06-20T00:00:00.000Z",
   },
   {
+    id: "proj-02",
     slug: "nexus-core",
     title: "Nexus Core",
     category: "Open Source",
     description:
-      "A lightweight state management library optimized for ultra-low latency and complex reactive application trees.",
+      "A lightweight reactive state engine optimized for ultra-low latency and deterministic state trees.",
     overview:
-      "Nexus Core is a tiny open-source runtime for building highly reactive interfaces without bloated dependencies.",
+      "Nexus Core is a zero-dependency open-source library for managing reactive UI tree state across modern browser runtimes.",
     problem:
-      "Developers were forced to choose between heavy frameworks and brittle custom solutions for high-performance UI state.",
+      "Developers faced significant runtime bloat and hydration mismatches when using heavy monolithic state frameworks.",
     solution:
-      "We shipped a minimal API with observable primitives, enabling fast renders and safe hydration on any platform.",
+      "Designed an observable-driven reactive primitive that eliminates redundant re-renders and provides predictable time-travel debugging.",
     highlights: [
-      "Zero-dependency reactive engine",
-      "Predictable state transitions with snapshotting",
-      "Optimized for modern web and edge deployments",
+      "Zero-dependency reactive core with bundle size under 5KB",
+      "Deterministic state transitions with snapshotting",
+      "First-class TypeScript ergonomics and strict immutability",
     ],
-    tags: ["WASM", "Go", "Redis"],
-    heroImage:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&q=80",
+    tags: ["TypeScript", "WebAssembly", "Reactive", "Open Source"],
+    heroImage: {
+      src: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&q=80",
+      alt: "Clean code structure and system architecture diagram",
+    },
     techStack: [
       {
         title: "Runtime",
-        items: ["WebAssembly", "Go", "Redis"],
+        items: ["TypeScript", "ESM", "WebAssembly"],
       },
       {
-        title: "Tooling",
-        items: ["TypeScript", "ESM", "Vite"],
+        title: "Testing & Tooling",
+        items: ["Vitest", "Vite", "ESLint"],
       },
       {
-        title: "Deployment",
-        items: ["Netlify", "Cloudflare Workers"],
+        title: "Distribution",
+        items: ["npm", "GitHub Packages"],
       },
     ],
-    metrics: [
-      { label: "Bundle Size", value: "< 5KB" },
-      { label: "Startup Time", value: "< 16ms" },
-      { label: "GitHub Stars", value: "6.3K" },
-    ],
-    demoUrl: "#",
-    githubUrl: "#",
+    featured: true,
+    published: true,
+    createdAt: "2024-11-10T00:00:00.000Z",
+    updatedAt: "2025-04-12T00:00:00.000Z",
   },
   {
+    id: "proj-03",
     slug: "lumina-workspace",
     title: "Lumina Workspace",
     category: "Web App",
     description:
-      "A productivity suite for design-led engineering teams with live collaborative prototyping.",
+      "Collaborative project canvas blending design systems, real-time code previews, and developer workflows.",
     overview:
-      "Lumina Workspace blends project management, code collaboration, and visual design in one elegant interface.",
+      "Lumina Workspace combines project specification with live interactive component sandboxing in one central view.",
     problem:
-      "Teams were using too many disconnected tools, leading to poor handoffs and slower product cycles.",
+      "Design-to-code handoffs suffered from fragmented tools, out-of-sync documentation, and manual specification reviews.",
     solution:
-      "We created a unified workspace where design systems, code previews, and team workflows share the same canvas.",
+      "Created a shared multiplayer canvas where design tokens, rendered React components, and user stories synchronize continuously.",
     highlights: [
-      "Live collaborative editing",
-      "Design system-driven component library",
-      "Priority-based developer workflow",
+      "Multiplayer collaboration with operational transformation",
+      "Live component compiler inside isolated worker sandbox",
+      "Automated token export to CSS variables and Tailwind config",
     ],
-    tags: ["React", "Tailwind", "Framer Motion"],
-    heroImage:
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80",
+    tags: ["Next.js", "React", "Tailwind CSS", "WebSockets"],
+    heroImage: {
+      src: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80",
+      alt: "Modern workspace interface highlighting design tokens and code preview",
+    },
     techStack: [
       {
         title: "Frontend",
-        items: ["React", "Tailwind CSS", "Framer Motion"],
+        items: ["Next.js", "React", "Tailwind CSS"],
       },
       {
-        title: "Data",
-        items: ["Firebase", "Supabase", "WebSockets"],
+        title: "Real-Time Engine",
+        items: ["WebSockets", "Node.js", "Redis"],
       },
       {
-        title: "DevOps",
-        items: ["Vercel", "Cypress", "Jest"],
+        title: "Deployment",
+        items: ["Vercel", "Docker"],
       },
     ],
-    metrics: [
-      { label: "Collaboration Uptime", value: "99.9%" },
-      { label: "Team Adoption", value: "512 teams" },
-      { label: "Feature Velocity", value: "2x faster" },
-    ],
-    demoUrl: "#",
-    githubUrl: "#",
+    featured: true,
+    published: true,
+    createdAt: "2025-03-01T00:00:00.000Z",
+    updatedAt: "2025-08-14T00:00:00.000Z",
   },
   {
+    id: "proj-04",
     slug: "vault-x",
     title: "Vault-X",
     category: "Infrastructure",
     description:
-      "Decentralized key management and secret storage built on hardware-level encryption.",
+      "Decentralized secrets management and cryptographic key rotation engine for distributed cloud services.",
     overview:
-      "Vault-X delivers enterprise-grade security for distributed systems and developer workflows.",
+      "Vault-X provides zero-trust secrets storage and policy-driven credential rotation across multi-cloud environments.",
     problem:
-      "Secrets were scattered across services, making rotation and access control difficult to maintain.",
+      "Static environment keys leaked across CI/CD pipelines and manual key rotations caused unpredictable service downtime.",
     solution:
-      "We designed an encrypted secrets vault with policy-driven access and audit logging for every transaction.",
+      "Built a secure proxy with short-lived dynamic credentials, automated rotation triggers, and immutable audit logs.",
     highlights: [
-      "Hardware-backed key storage",
-      "Fine-grained access policies",
-      "Built-in audit trail and rotation engine",
+      "Dynamic short-lived token generation with automated expiration",
+      "Hardware-backed encryption and policy enforcement",
+      "Comprehensive compliance audit logs streamed via secure gRPC",
     ],
-    tags: ["C++", "Docker", "gRPC"],
-    heroImage:
-      "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1400&q=80",
+    tags: ["Rust", "Docker", "gRPC", "PostgreSQL"],
+    heroImage: {
+      src: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=1400&q=80",
+      alt: "Security visualization representing encrypted data streams",
+    },
     techStack: [
       {
-        title: "Core",
-        items: ["C++", "gRPC", "OpenSSL"],
+        title: "Core Service",
+        items: ["Rust", "OpenSSL", "gRPC"],
+      },
+      {
+        title: "Storage",
+        items: ["PostgreSQL", "Redis"],
       },
       {
         title: "Infrastructure",
         items: ["Docker", "Kubernetes", "Terraform"],
       },
-      {
-        title: "Storage",
-        items: ["PostgreSQL", "Vault", "Redis"],
-      },
     ],
-    metrics: [
-      { label: "Secrets Managed", value: "1.4M" },
-      { label: "Access Policies", value: "380" },
-      { label: "Compliance", value: "SOC 2 Ready" },
-    ],
-    demoUrl: "#",
-    githubUrl: "#",
+    featured: false,
+    published: true,
+    createdAt: "2024-08-19T00:00:00.000Z",
+    updatedAt: "2025-02-18T00:00:00.000Z",
   },
   {
+    id: "proj-05",
     slug: "prism-dashboard",
     title: "Prism Dashboard",
     category: "Web App",
     description:
-      "A dashboard for large-scale log aggregation and anomaly detection with custom visualization.",
+      "High-throughput log aggregation and anomaly detection dashboard with customizable filtering pipelines.",
     overview:
-      "Prism Dashboard provides engineers with a single pane for monitoring complex infrastructure and user behavior.",
+      "Prism Dashboard provides observability into microservice performance with instant anomaly alerts and noise reduction.",
     problem:
-      "Existing monitoring tools were slow and difficult to customize for enterprise workflows.",
+      "Distributed server logs generated overwhelming volumes of noise, making it difficult to pinpoint root causes during outages.",
     solution:
-      "We built a WebGL-powered interface with dynamic filters and real-time signal analysis.",
+      "Developed a stream processing interface that clusters error patterns and calculates baseline variance in real-time.",
     highlights: [
-      "Custom visualization engine",
-      "Noise-filtered anomaly alerts",
-      "Adaptive dashboard templates",
+      "Sub-second log filtering over millions of event records",
+      "Noise-suppression heuristics for incident alerting",
+      "Customizable layout widgets with persisted workspace state",
     ],
-    tags: ["Three.js", "Elastic", "Node.js"],
-    heroImage:
-      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80",
+    tags: ["React", "TypeScript", "Node.js", "Elastic"],
+    heroImage: {
+      src: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80",
+      alt: "Observability dashboard display with real-time log graphs",
+    },
     techStack: [
       {
-        title: "Visualization",
-        items: ["Three.js", "D3", "WebGL"],
+        title: "Frontend",
+        items: ["React", "Next.js", "Tailwind CSS"],
       },
       {
-        title: "Engine",
-        items: ["Node.js", "Elastic", "Kafka"],
+        title: "Processing Engine",
+        items: ["Node.js", "Kafka", "Elasticsearch"],
       },
       {
-        title: "Ops",
-        items: ["Docker", "Prometheus", "Grafana"],
+        title: "Monitoring",
+        items: ["Prometheus", "Grafana", "Docker"],
       },
     ],
-    metrics: [
-      { label: "Alerts Delivered", value: "12K / day" },
-      { label: "Dashboard Load", value: "< 180ms" },
-      { label: "Retention", value: "98%" },
-    ],
-    demoUrl: "#",
-    githubUrl: "#",
+    featured: false,
+    published: true,
+    createdAt: "2024-05-14T00:00:00.000Z",
+    updatedAt: "2024-12-05T00:00:00.000Z",
   },
   {
+    id: "proj-06",
     slug: "velocity-hr",
     title: "Velocity HR",
     category: "SaaS",
     description:
-      "Enterprise human capital management platform powered by AI-driven team insights.",
+      "Human capital management SaaS platform with automated performance review pipelines and organizational modeling.",
     overview:
-      "Velocity HR helps growing organizations align hiring, performance, and culture in one central platform.",
+      "Velocity HR replaces cumbersome review cycles with continuous structured feedback, team alignment, and milestone tracking.",
     problem:
-      "HR teams were locked into slow legacy systems with poor analytics and opaque reporting.",
+      "Organizations struggled with fragmented spreadsheet reviews and lack of visibility into team goals and skill progression.",
     solution:
-      "We implemented AI scoring for hiring and a workflow-driven performance review system with real-time feedback.",
+      "Shipped a unified portal with automated review triggers, 360-degree feedback workflows, and organization hierarchy modeling.",
     highlights: [
-      "AI-powered people insights",
-      "Automated review workflows",
-      "Scalable org modeling",
+      "Structured 360-degree review workflows with multi-role permissions",
+      "Dynamic team hierarchy tree with drag-and-drop reorganization",
+      "Granular notification preferences and calendar synchronization",
     ],
-    tags: ["PyTorch", "Vue 3", "PostgreSQL"],
-    heroImage:
-      "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=1400&q=80",
+    tags: ["Next.js", "PostgreSQL", "Tailwind CSS", "TypeScript"],
+    heroImage: {
+      src: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=1400&q=80",
+      alt: "Clean enterprise interface showing organizational performance metrics",
+    },
     techStack: [
       {
-        title: "AI",
-        items: ["PyTorch", "Python", "FastAPI"],
-      },
-      {
         title: "Frontend",
-        items: ["Vue 3", "Tailwind CSS", "Pinia"],
+        items: ["Next.js", "React", "Tailwind CSS", "TypeScript"],
       },
       {
-        title: "Data",
-        items: ["PostgreSQL", "Redis", "Airflow"],
+        title: "Backend & Data",
+        items: ["Node.js", "PostgreSQL", "Prisma/Drizzle"],
+      },
+      {
+        title: "Cloud & Security",
+        items: ["Vercel", "AWS S3", "Auth0"],
       },
     ],
-    metrics: [
-      { label: "Team Efficiency", value: "+34%" },
-      { label: "Time Saved", value: "1.6M hrs" },
-      { label: "Adoption", value: "76%" },
-    ],
-    demoUrl: "#",
-    githubUrl: "#",
+    featured: false,
+    published: true,
+    createdAt: "2024-02-10T00:00:00.000Z",
+    updatedAt: "2024-11-20T00:00:00.000Z",
   },
 ];
 
-export function getAllProjects() {
-  return projects;
+// Verify integrity at initialization time
+const slugs = new Set<string>();
+for (const p of projects) {
+  if (slugs.has(p.slug)) {
+    throw new Error(`Duplicate project slug detected: "${p.slug}"`);
+  }
+  slugs.add(p.slug);
 }
 
-export function getProjectBySlug(slug: string) {
-  return projects.find((project) => project.slug === slug);
+/**
+ * Get all published projects.
+ */
+export function getPublishedProjects(): Project[] {
+  return projects.filter((project) => project.published);
 }
 
-export function getAllProjectSlugs() {
-  return projects.map((project) => project.slug);
+/**
+ * Get featured projects for homepage showcase.
+ */
+export function getFeaturedProjects(): Project[] {
+  return projects.filter((project) => project.published && project.featured);
+}
+
+/**
+ * Get a specific published project by slug.
+ */
+export function getProjectBySlug(slug: string): Project | undefined {
+  return projects.find((project) => project.published && project.slug === slug);
+}
+
+/**
+ * Get all valid published slugs for static generation.
+ */
+export function getAllPublishedProjectSlugs(): string[] {
+  return getPublishedProjects().map((project) => project.slug);
+}
+
+/**
+ * Legacy alias for backwards compatibility.
+ */
+export function getAllProjects(): Project[] {
+  return getPublishedProjects();
 }
