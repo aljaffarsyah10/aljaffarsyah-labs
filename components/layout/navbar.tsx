@@ -51,7 +51,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden md:flex items-center gap-8 text-xs font-medium uppercase tracking-[0.24em] text-slate-300">
+        <div className="hidden md:flex items-center gap-8 text-xs font-semibold uppercase tracking-wider text-slate-300">
           {navItems.map((item) => {
             const isActive =
               item.href === "/"
@@ -63,8 +63,8 @@ export function Navbar() {
                 href={item.href}
                 className={`transition-colors hover:text-white py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300 rounded ${
                   isActive
-                    ? "text-white font-semibold border-b border-white"
-                    : "text-slate-400"
+                    ? "text-white font-bold border-b-2 border-white"
+                    : "text-slate-300"
                 }`}
               >
                 {item.label}
@@ -77,7 +77,7 @@ export function Navbar() {
         <div className="hidden md:flex items-center gap-4">
           <Link
             href="/contact"
-            className="rounded-full bg-slate-100 px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.24em] text-black transition hover:bg-white active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
+            className="rounded-full bg-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-black transition-all hover:bg-slate-200 hover:shadow-md hover:shadow-white/10 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
           >
             Let&apos;s Talk
           </Link>

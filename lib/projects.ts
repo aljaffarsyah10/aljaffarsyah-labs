@@ -2,6 +2,90 @@ import type { Project } from "@/types/project";
 
 export const projects: Project[] = [
   {
+    id: "proj-rust-converter",
+    slug: "rust-converter",
+    title: "OmniConvert Engine (Rust)",
+    category: "Infrastructure",
+    description:
+      "High-throughput multi-threaded file conversion engine written in Rust for parallel audio, video, document, and image processing.",
+    overview:
+      "OmniConvert Engine is an ultra-fast file conversion runtime engineered in Rust. Designed to handle heavy multi-format transcoding workloads with sub-50ms startup times, parallel batching, and an exceptionally small memory footprint.",
+    problem:
+      "Existing conversion microservices in the industry relied on legacy wrapper scripts that suffered from excessive memory leaks, slow cold starts, and unstable concurrency during peak transcoding queue spikes.",
+    solution:
+      "Re-engineered the conversion pipeline natively in Rust utilizing Tokio asynchronous concurrency, SIMD acceleration for image transcoding, and streaming chunk buffers to prevent out-of-memory crashes on large files.",
+    highlights: [
+      "Native streaming transcode pipeline handling 500MB+ files with <60MB RAM footprint",
+      "Parallel batch conversion scaling linearly across multi-core CPU architectures",
+      "Zero-copy buffer allocation for ultra-low latency document and media transforms",
+    ],
+    tags: ["Rust", "Tokio", "WebAssembly", "FFmpeg", "SIMD"],
+    heroImage: {
+      src: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1400&q=80",
+      alt: "Rust file converter architecture and high-performance server telemetry",
+    },
+    techStack: [
+      {
+        title: "Frontend & Sandbox",
+        items: ["Next.js", "React", "Tailwind CSS", "Web Workers"],
+      },
+      {
+        title: "Core Conversion Engine",
+        items: ["Rust", "Tokio", "Rayon", "SIMD"],
+      },
+      {
+        title: "Infrastructure & Queue",
+        items: ["Docker", "AWS ECS", "Redis Queue"],
+      },
+    ],
+    featured: true,
+    published: true,
+    createdAt: "2025-04-10T00:00:00.000Z",
+    updatedAt: "2025-09-15T00:00:00.000Z",
+  },
+  {
+    id: "proj-linkly",
+    slug: "linkly",
+    title: "Linkly — Smart Shortlinks",
+    category: "SaaS",
+    description:
+      "Modern link management & enterprise shortlink platform with real-time analytics, custom branded domains, and geo-targeting.",
+    overview:
+      "Linkly is a high-performance URL shortening and marketing analytics platform engineered to deliver sub-15ms redirects worldwide alongside deep edge telemetry, UTM builders, and campaign tracking.",
+    problem:
+      "Traditional URL shorteners provided clunky dashboards, sluggish redirection times, and lacked granular geo-filtering and privacy-respecting attribution.",
+    solution:
+      "Engineered an edge-routed redirection architecture with Upstash Redis cache-ahead reads, PostgreSQL persistence, and an interactive real-time telemetry dashboard.",
+    highlights: [
+      "Sub-15ms global edge redirect latency powered by distributed key-value caching",
+      "Real-time clickstream analytics with referrer, device, and geographic breakdowns",
+      "Dynamic UTM builder, QR code generation, and custom branded domain routing",
+    ],
+    tags: ["Next.js", "TypeScript", "Redis", "PostgreSQL", "Tailwind CSS"],
+    heroImage: {
+      src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80",
+      alt: "Linkly URL shortener analytics dashboard showing click tracking charts",
+    },
+    techStack: [
+      {
+        title: "Frontend & Dashboard",
+        items: ["Next.js", "React", "Tailwind CSS", "Shadcn UI"],
+      },
+      {
+        title: "Backend & Edge",
+        items: ["Server Actions", "Upstash Redis", "Zod"],
+      },
+      {
+        title: "Database & Storage",
+        items: ["PostgreSQL", "Prisma", "Vercel Edge"],
+      },
+    ],
+    featured: true,
+    published: true,
+    createdAt: "2025-02-01T00:00:00.000Z",
+    updatedAt: "2025-10-01T00:00:00.000Z",
+  },
+  {
     id: "proj-01",
     slug: "aether-analytics",
     title: "Aether Analytics",

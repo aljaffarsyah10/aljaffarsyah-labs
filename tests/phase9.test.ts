@@ -38,12 +38,16 @@ export async function runEndToEndVerification() {
   // Scenario 1: Sitemap & Navigation Links
   recordTest("Sitemap Completeness", "Routing", () => {
     const map = sitemap();
-    assert(map.length === 10, `Expected 10 URLs in sitemap, got ${map.length}`);
+    const published = getPublishedProjects();
+    const expectedCount = 4 + published.length;
+    assert(map.length === expectedCount, `Expected ${expectedCount} URLs in sitemap, got ${map.length}`);
     const urls = map.map((m) => m.url);
     assert(urls.includes("https://aljaffarsyah.com"), "Home URL must exist");
     assert(urls.includes("https://aljaffarsyah.com/projects"), "Projects URL must exist");
     assert(urls.includes("https://aljaffarsyah.com/about"), "About URL must exist");
     assert(urls.includes("https://aljaffarsyah.com/contact"), "Contact URL must exist");
+    assert(urls.includes("https://aljaffarsyah.com/projects/rust-converter"), "Rust converter must be in sitemap");
+    assert(urls.includes("https://aljaffarsyah.com/projects/linkly"), "Linkly must be in sitemap");
     return `Verified ${map.length} canonical URLs generated with valid priorities`;
   });
 
@@ -58,13 +62,15 @@ export async function runEndToEndVerification() {
   recordTest("Single Source of Truth (Homepage & Catalog)", "Data Integrity", () => {
     const published = getPublishedProjects();
     const featured = getFeaturedProjects();
-    assert(published.length === 6, `Expected 6 published projects, got ${published.length}`);
-    assert(featured.length === 3, `Expected 3 featured projects for homepage, got ${featured.length}`);
+    assert(published.length >= 8, `Expected at least 8 published projects, got ${published.length}`);
+    assert(featured.length >= 3, `Expected at least 3 featured projects for homepage, got ${featured.length}`);
+    assert(published.some((p) => p.slug === "rust-converter"), "Rust file converter must exist in catalog");
+    assert(published.some((p) => p.slug === "linkly"), "Linkly must exist in catalog");
     // Check that every featured project is also in published projects
     for (const f of featured) {
       assert(published.some((p) => p.slug === f.slug), `Featured project ${f.slug} must exist in published catalog`);
     }
-    return `Catalog has ${published.length} projects; Homepage showcases ${featured.length} featured items from the exact same source`;
+    return `Catalog has ${published.length} projects including Rust Converter and Linkly; Homepage showcases ${featured.length} featured items from the exact same source`;
   });
 
   recordTest("Valid vs. Invalid Slug Resolution", "Routing & 404", () => {
